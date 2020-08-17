@@ -58,7 +58,12 @@ const App = () => {
 
     return (
         <AppWrapper id="gbfs-ui">
-            <TopPanel stationName={stationStatus && stationStatus.name} />
+            <TopPanel
+                stationName={stationStatus && stationStatus.name}
+                station={station}
+                setStation={setStation}
+                stationsInfo={stationsInfo}
+            />
             <ViewArea
                 showLoadingIndicator={showLoadingIndicator}
                 stationStatus={stationStatus}
