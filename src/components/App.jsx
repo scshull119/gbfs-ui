@@ -16,7 +16,7 @@ const AppWrapper = styled.section`
 const App = () => {
     const [ statusLoading, setStatusLoading ] = useState(false);
     const [ infoLoading, setInfoLoading ] = useState(false);
-    const [ station, setStation ] = useState('3992');
+    const [ station, setStation ] = useState('4068');
     const [ stationsInfo, setStationsInfo ] = useState(null);
     const [ stationStatus, setStationStatus ] = useState(null);
 
