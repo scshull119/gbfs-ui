@@ -18,7 +18,6 @@ const StationView = ({
     stationsInfo,
     infoLoading,
 }) => {
-    console.log(station);
     const [ statusLoading, setStatusLoading ] = useState(false);
     const [ stationStatus, setStationStatus ] = useState(null);
     
