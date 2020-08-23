@@ -20,7 +20,6 @@ const Title = styled.span`
 const TopPanel = ({
     stationName,
     station,
-    setStation,
     stationsInfo,
 }) => {
     const titleText = stationName ? `BikeInfo: ${stationName}` : 'BikeInfo';
@@ -29,7 +28,6 @@ const TopPanel = ({
             <Title>{titleText}</Title>
             <StationSelectContainer
                 station={station}
-                setStation={setStation}
                 stationsInfo={stationsInfo}
             />
         </Panel>
@@ -39,7 +37,6 @@ const TopPanel = ({
 TopPanel.propTypes = {
     stationName: PropTypes.string,
     station: PropTypes.string.isRequired,
-    setStation: PropTypes.func.isRequired,
     stationsInfo: PropTypes.objectOf(infoPropTypes)
 };
 

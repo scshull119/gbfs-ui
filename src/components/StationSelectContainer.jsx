@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { useHistory } from 'react-router-dom';
 import { infoPropTypes } from '../propTypes';
 
 const Wrapper = styled.div`
@@ -11,9 +12,10 @@ const Wrapper = styled.div`
 const StationSelectContainer = (props) => {
     const {
         station,
-        setStation,
         stationsInfo
     } = props;
+
+    const history = useHistory();
 
     const selectValue = useMemo(
         () => stationsInfo && { value: station, label: stationsInfo[station].name },
@@ -32,8 +34,8 @@ const StationSelectContainer = (props) => {
     }, [stationsInfo]);
 
     const onSelectChange = useCallback((opt) => {
-        setStation(opt.value);
-    }, [setStation]);
+        history.push(`/station/${opt.value}`);
+    }, []);
 
     return (
         <Wrapper>
@@ -49,7 +51,6 @@ const StationSelectContainer = (props) => {
 
 StationSelectContainer.propTypes = {
     station: PropTypes.string.isRequired,
-    setStation: PropTypes.func.isRequired,
     stationsInfo: PropTypes.objectOf(infoPropTypes),
 };
 
