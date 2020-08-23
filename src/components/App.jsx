@@ -39,7 +39,7 @@ const App = () => {
         <AppWrapper id="gbfs-ui">
             <Router>
                 <Switch>
-                    <Route path="/station/:station"
+                    <Route
                         path="/station/:id"
                         render={routeProps => (
                             <StationView
