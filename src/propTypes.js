@@ -16,3 +16,11 @@ export const statusPropTypes = PropTypes.shape({
     returning: PropTypes.bool.isRequired,
     lastReported: PropTypes.number.isRequired,
 });
+
+export const infoPropTypes = PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    capacity: PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
+    lon: PropTypes.number.isRequired,
+});

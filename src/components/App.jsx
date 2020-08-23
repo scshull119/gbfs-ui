@@ -1,24 +1,22 @@
 import React, {
-    useState, useEffect,
+    useState, useEffect
 } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+} from 'react-router-dom';
 import styled from 'styled-components'
-import TopPanel from './TopPanel';
-import ViewArea from './ViewArea';
+import StationView from './StationView';
 import { STATIONS_URL } from '../constants/urls';
 
 const AppWrapper = styled.section`
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
 `;
 
 const App = () => {
-    const [ statusLoading, setStatusLoading ] = useState(false);
     const [ infoLoading, setInfoLoading ] = useState(false);
-    const [ station, setStation ] = useState('3992');
     const [ stationsInfo, setStationsInfo ] = useState(null);
-    const [ stationStatus, setStationStatus ] = useState(null);
 
     useEffect(() => {
         setInfoLoading(true);
@@ -37,32 +35,25 @@ const App = () => {
             });
     }, []);
 
-    useEffect(() => {
-        setStatusLoading(true);
-        fetch(`${STATIONS_URL}/${station}`)
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw res;
-            }).then((data) => {
-                setStationStatus(data);
-            }).catch((err) => {
-                console.error(err);
-            }).finally(() => {
-                setStatusLoading(false);
-            });
-    }, [station]);
-
-    const showLoadingIndicator = infoLoading || statusLoading;
-
     return (
         <AppWrapper id="gbfs-ui">
-            <TopPanel stationName={stationStatus && stationStatus.name} />
-            <ViewArea
-                showLoadingIndicator={showLoadingIndicator}
-                stationStatus={stationStatus}
-            />
+            <Router>
+                <Switch>
+                    <Route
+                        path="/station/:id"
+                        render={routeProps => (
+                            <StationView
+                                station={routeProps.match.params.id}
+                                stationsInfo={stationsInfo}
+                                infoLoading={infoLoading}
+                            />
+                        )}
+                    />
+                    <Route path="/">
+                        <h1>Welcome to BikeInfo. Please choose a station.</h1>
+                    </Route>
+                </Switch>
+            </Router>
         </AppWrapper>
     );
 };
